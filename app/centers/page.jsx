@@ -1,6 +1,8 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Phone, Clock, Star } from "lucide-react"
+import { useState } from "react"
 
 // Sample data for diagnostic centers
 const diagnosticCenters = [
@@ -67,6 +69,16 @@ const diagnosticCenters = [
 ]
 
 export default function DiagnosticCentersPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredCenters = diagnosticCenters.filter((center) =>
+    center.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    center.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    center.services.some(service =>
+      service.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
   return (
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="container mx-auto px-4">
@@ -76,10 +88,17 @@ export default function DiagnosticCentersPage() {
             Find a MediScan diagnostic center near you. All our centers are equipped with modern technology and staffed
             by experienced professionals.
           </p>
+          <input
+            type="text"
+            placeholder="Search by name, address, or service..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className=" mt-5 w-full max-w-md px-4 py-2 border border-gray-900 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-8"
+          />
         </div>
 
         <div className="space-y-8">
-          {diagnosticCenters.map((center) => (
+          {filteredCenters.map((center) => (
             <div key={center.id} className="overflow-hidden rounded-lg bg-white shadow-md transition hover:shadow-lg">
               <div className="grid md:grid-cols-3">
                 <div className="relative h-64 w-full md:h-full">

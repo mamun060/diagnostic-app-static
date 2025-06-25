@@ -44,18 +44,14 @@ export default function Header() {
                 Diagnostic Centers
               </Link>
             </li>
+           
             <li>
-              <Link href="#services" className="text-gray-700 hover:text-teal-600">
-                Services
-              </Link>
-            </li>
-            <li>
-              <Link href="#about" className="text-gray-700 hover:text-teal-600">
+              <Link href="/about" className="text-gray-700 hover:text-teal-600">
                 About Us
               </Link>
             </li>
             <li>
-              <Link href="#contact" className="text-gray-700 hover:text-teal-600">
+              <Link href="/contact" className="text-gray-700 hover:text-teal-600">
                 Contact
               </Link>
             </li>
